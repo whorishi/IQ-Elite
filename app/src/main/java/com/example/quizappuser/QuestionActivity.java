@@ -92,7 +92,7 @@ public class QuestionActivity extends AppCompatActivity {
                                         if(position==list.size()){
                                             Intent intent = new Intent(QuestionActivity.this,ScoreActivity.class);
                                             intent.putExtra("score",score);
-                                            intent.putExtra("totalQiestion",list.size());
+                                            intent.putExtra("totalQuestion",list.size());
                                             startActivity(intent);
                                             finish();
                                             return;
@@ -133,7 +133,9 @@ public class QuestionActivity extends AppCompatActivity {
                 if(position==list.size()){
                     Intent intent = new Intent(QuestionActivity.this,ScoreActivity.class);
                     intent.putExtra("score",score);
-                    intent.putExtra("totalQuestion",list.size());
+                    int totalQuestion = list.size();
+                    intent.putExtra("totalQuestion",totalQuestion);
+                    Toast.makeText(QuestionActivity.this, "totalQuestions = " + list.size(), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                     finish();
                     return;

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
 
     ProgressDialog progressDialog;
-
+    Dialog loadingDialog;
     ArrayList<CategoryModel> list;
     CategoryAdapter adapter;
 
@@ -47,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         list = new ArrayList<>();
+
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.loading_dialog);
+
+        if(loadingDialog.getWindow()!=null)
+        {
+            loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            loadingDialog.setCancelable(false);
+        }
+        loadingDialog.show();
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         binding.recyCategory.setLayoutManager(layoutManager);
@@ -69,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
                         ));
                     }
                     adapter.notifyDataSetChanged();
+                    loadingDialog.dismiss();
                 }else{
                     Toast.makeText(MainActivity.this, "Category does not exists", Toast.LENGTH_SHORT).show();
+                    loadingDialog.dismiss();
                 }
             }
 
