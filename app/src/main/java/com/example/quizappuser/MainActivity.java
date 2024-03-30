@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
         loadingDialog.show();
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,1);
         binding.recyCategory.setLayoutManager(layoutManager);
 
         adapter = new CategoryAdapter(this,list);
